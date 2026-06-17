@@ -1,0 +1,11 @@
+<div class="sidebar">
+    <h2>Menü</h2>
+
+    <button onclick="showGallery()">
+        Galerie
+    </button>
+
+    <button onclick="showMatch()">
+        Matchen
+    </button>
+</div>
