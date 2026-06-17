@@ -1,0 +1,27 @@
+.tinder-card{
+    width:400px;
+    height:500px;
+    margin:auto;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.tinder-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.match-buttons{
+    text-align:center;
+    margin-top:20px;
+}
+
+.match-buttons button{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    font-size:30px;
+}
