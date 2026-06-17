@@ -1,0 +1,17 @@
+<div id="matchSection" style="display:none;">
+
+    <div class="tinder-card" id="tinderCard">
+        <img id="matchImage">
+    </div>
+
+    <div class="match-buttons">
+        <button onclick="swipeLeft()">
+            ❌
+        </button>
+
+        <button onclick="swipeRight()">
+            ❤️
+        </button>
+    </div>
+
+</div>
