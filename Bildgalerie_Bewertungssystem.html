@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bildgalerie & Bewertungssystem</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0}
+header{background:#222;color:#fff;padding:20px;text-align:center}
+.container{width:90%;max-width:1200px;margin:30px auto}
+.upload-box,.card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card img{width:100%;height:250px;object-fit:cover}
+.star{font-size:24px;color:#ccc;cursor:pointer}
+.star.active{color:gold}
+button{padding:10px 20px;cursor:pointer}
+</style>
+</head>
+<body>
+<header><h1>Bildgalerie & Bewertungssystem</h1></header>
+<div class="container">
+<div class="upload-box">
+<h2>Bild hochladen</h2>
+<input type="file" id="imageUpload" accept="image/*">
+<button onclick="uploadImage()">Hochladen</button>
+</div>
+<div class="gallery" id="gallery"></div>
+</div>
+<script>
+function uploadImage(){
+ const input=document.getElementById('imageUpload');
+ if(!input.files.length){alert('Bitte Bild auswählen');return;}
+ const file=input.files[0];
+ const reader=new FileReader();
+ reader.onload=e=>{
+  const card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=`
+   <img src="${e.target.result}">
+   <h3>${file.name}</h3>
+   <a href="${e.target.result}" download="${file.name}">
+      <button>Bild herunterladen</button>
+   </a>
+   <div>${[1,2,3,4,5].map(i=>`<span class="star" data-rating="${i}">★</span>`).join('')}</div>`;
+  document.getElementById('gallery').prepend(card);
+  const stars=card.querySelectorAll('.star');
+  stars.forEach(star=>star.onclick=()=>{
+    const r=+star.dataset.rating;
+    stars.forEach(s=>s.classList.toggle('active', +s.dataset.rating<=r));
+  });
+ };
+ reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>
