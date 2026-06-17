@@ -1,0 +1,58 @@
+let uploadedImages = [];
+let currentMatch = 0;
+let likedImages = [];
+
+function uploadImage() {
+
+    const file = document.getElementById("imageUpload").files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        uploadedImages.push({
+            name: file.name,
+            src: e.target.result
+        });
+
+        renderGallery();
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function showMatch(){
+
+    document.getElementById("matchSection").style.display = "block";
+
+    loadNextMatch();
+}
+
+function loadNextMatch(){
+
+    if(currentMatch >= uploadedImages.length){
+
+        alert("Keine weiteren Bilder vorhanden");
+        return;
+    }
+
+    document.getElementById("matchImage").src =
+        uploadedImages[currentMatch].src;
+}
+
+function swipeLeft(){
+
+    currentMatch++;
+    loadNextMatch();
+}
+
+function swipeRight(){
+
+    likedImages.push(
+        uploadedImages[currentMatch]
+    );
+
+    currentMatch++;
+
+    loadNextMatch();
+}
